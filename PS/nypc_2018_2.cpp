@@ -50,84 +50,101 @@ public:
 //게임 클래스
 class Game {
 private:
-    //게임 종류(스피드, 아이템)
+//게임종류(스피드전, 아이템전)
     string type;
-    //이긴 팀(blue or red)
+//이긴팀(blue or red)
     string winner;
-    //선수배열(벡터)
+//선수배열(벡터)
     vector<Player> players;
-    //팀별 점수 합계(blue, red)
+//팀별 점수합계(blue, red)
     int blueScore, redScore;
 
-    //승자 세팅(아이템전 : player[0]의 팀, 스피드전 : 두 팀의 합산 스코어 비교)
+//승자 세팅(아이템전 -player[0]의 팀에따라 결정, 스피드전 - 두팀의 합산스코어를 비교)
     void setWinner() {
-      //item
+//item
       if(type == "item") {
-        if(players[0].getTeamType() == "blue") winner = "blue";
-        else winner = "red";
+        if(players[0].getTeamType() == "blue")
+          winner = "blue";
+        else
+          winner = "red";
       }
+//speed
       else {
-        if(blueScore == redScore) {
-          if(players[0].getTeamType() == "blue") winner = "blue";
-          else winner = "red";
+//두팀의 스코어가 같을 경우(첫번째 주자의 팀이 승리)
+        if (redScore == blueScore) {
+          if (players[0].getTeamType() == "red")
+            winner = "red";
+          else
+            winner = "blue";
         }
-        else if(blueScore > redScore) winner = "blue";
-        else winner = "red";
+//아닌경우 합산스코어가 높은 팀이 승리
+        else if(redScore > blueScore)
+          winner = "red";
+        else
+          winner = "blue";
       }
     }
+
 public:
-    //생성자
-    explicit Game(string type, string winner="", int blueScore=0, int redScore=0) : type(std::move(
+//생성자
+    explicit Game(string type = "", string winner ="", int blueScore =0, int redScore=0) : type(std::move(
             type)), winner(std::move(winner)), players(numOfPlayer), blueScore(blueScore), redScore(redScore) {}
 
-    //정렬 기준(오름차순)
+//정렬기준(오름차순)
     static bool sortRank(const Player& p1, const Player& p2) {
       return p1.getRecord() < p2.getRecord();
     }
-    //기록에 다른 점수처리
+
+//기록에 따른 점수처리
     void update() {
-      //기록 정렬(players[0] -> 1등 기록이 되도록)
+//먼저 기록 정렬(players[0] ->1등기록이 되도록)
       std::sort(players.begin(), players.end(), sortRank);
-      //플레이어를 for문으로 돌면서 record에 따른 score 책정(1등과 10.0초 이상 차이시 0점)
-      int order = 0;
-      double bestRac = 0.0;
-      for(auto &player: players) {
-        //1등 기록 베스트 기록으로 저장
+
+//플레이어를 for문으로 돌면서 record에 따른 score 책정(1등과 10초 이상 차이시 0점)
+      int order =0;
+      double bestRec = 0.0;
+      for(auto &player: players){
+//1등 기록 베스트 기록으로 저장
         if(order == 0) {
-          bestRac = player.getScore();
+          bestRec = player.getRecord();
           player.setScore(score[order]);
         }
-        //나머지는 베스트기록과 비교해서 10.0이상 차이나면 recode 0점
-        else if(player.getRecord() >= bestRac + 10.0) {
+//나머지는 베스트기록과 비교해서 10초이상 차이나면 recode 0점
+        else if(player.getRecord() >= bestRec + 10.0) {
           player.setScore(0);
         }
-        //아니면 10 ~ 1점;
-        else player.setScore((score[order]));
-        //팀별 점수 즉각 합산
-        if(player.getTeamType() == "blue") blueScore += player.getScore();
-        else redScore += player.getScore();
-        order++;
+//아니면 10~1점까지 저장
+        else
+          player.setScore(score[order]);
+//팀별 점수를 즉각 합산
+        if(player.getTeamType() == "blue")
+          blueScore += player.getScore();
+        else
+          redScore += player.getScore();
+        order ++;
       }
-      //승자 세팅
+
+//승자 세팅
       setWinner();
     }
 
-    //static 문자열 기록(xx:xx.xx) -> 숫잦 기록(xxx초)으로 변경
-    static double setTimeRecord(const string& strRec, char c) {
+//static 문자열기록(xx:xx.xx) -> 숫자 기록(xxx초)으로 변경
+    static double getTimeRecord(const string& strRec, char c){
       string str;
       double dRec;
       int token;
-      //':' 문자가 있는 인덱스 값 찾어서 token에 저장
+//':'문자가 있는 인덱스 값 찾아서 token에 저장
       token = strRec.find(c);
-      //분단위 부터 잘라서 초로 바꾸어 저장
+//분단위 부터 잘라서 초로 바꾸어 저장
       str = strRec.substr(0, token);
-      dRec = atof(str.c_str()) * 60;
-      //초단위 잘라서 최종 저장
+      dRec = atof(str.c_str()) *60;
+//초단위 잘라서 더해서 최종저장
       str = strRec.substr(++token, strRec.length());
-      dRec += atof(str.c_str());
+      dRec = dRec +atof(str.c_str());
       return dRec;
     }
-    //get, set 메서드
+
+//get, set 메서드들
     const string &getType() const {
       return type;
     }
@@ -140,7 +157,8 @@ public:
       return winner;
     }
 
-    vector<Player> &getPlayers() {
+
+    vector<Player> &getPlayers(){
       return players;
     }
 
@@ -164,7 +182,6 @@ public:
       Game::redScore = redScore;
     }
 };
-
 int main() {
   //테스트 케이스 수(t) 입력
   int t; cin>>t;
@@ -180,7 +197,7 @@ int main() {
       cin>>team>>rec;
 
       games[i].getPlayers()[j].setTeamType(team);
-      games[i].getPlayers()[j].setRecord(Game::setTimeRecord(rec, ':'));
+      games[i].getPlayers()[j].setRecord(Game::getTimeRecord(rec, ':'));
     }
   }
   //게임 결과 출력
