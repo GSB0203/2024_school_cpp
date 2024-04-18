@@ -1,0 +1,1 @@
+"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\김승빈\Desktop\c++\Prac_std_move -B C:\Users\김승빈\Desktop\c++\Prac_std_move\cmake-build-debug
