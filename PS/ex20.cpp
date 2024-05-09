@@ -6,8 +6,8 @@ int main() {
   freopen("ex20_input.txt", "rt", stdin);
   int n; cin>>n;
   int i;
-  vector<int> A(100, 0);
-  vector<int> B(100, 0);
+  vector<int> A(n, 0);
+  vector<int> B(n, 0);
 
   for(i=0;i<n;i++) {
     cin>>A[i];
