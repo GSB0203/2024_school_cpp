@@ -1,0 +1,12 @@
+prefix sum : 구간합
+two pointer : 투 포인터
+sliding window : 슬라이딩 윈도우
+stack, queue
+sort
+search
+gready algorithm
+number theory : 정수론
+graph
+tree
+permutation & combination : 순열 & 조합
+dynamic programing : 동적 프로그래밍

@@ -1,0 +1,15 @@
+(대기업 입사용)Coing test skills
+pretix sum
+two pinter
+sliding window
+stack, queue
+
+sort (bubble, insertion, merge, quick, heap, selection, radix)
+search (binary, depth-first-search, breadth-list-search)
+Greedy algorithm
+graph
+tree
+number theory (Euler phi function, Euler phi function)
+
+permutation, combination
+dynamic programing
