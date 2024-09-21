@@ -182,6 +182,8 @@ public:
       Game::redScore = redScore;
     }
 };
+
+
 int main() {
   //테스트 케이스 수(t) 입력
   int t; cin>>t;

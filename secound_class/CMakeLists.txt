@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.27)
+project(secound_class)
+
+set(CMAKE_CXX_STANDARD 14)
+
+
+add_executable(11720 11720.cpp)
+add_executable(1546 1546.cpp)
+add_executable(11659 11659.cpp)
+add_executable(11660 11660.cpp)
+add_executable(1940 1940.cpp)
+add_executable(2164 2164.cpp)
+add_executable(11286 11286.cpp)
+add_executable(11003 11003.cpp)
+add_executable(2750 2750.cpp)
+add_executable(11399 11399.cpp)
+add_executable(11004 11004.cpp)
+add_executable(1427 1427.cpp)
+add_executable(10989 10989.cpp)
+add_executable(17298 17298.cpp)
